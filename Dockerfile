@@ -8,4 +8,7 @@ RUN apk -v --update add python py-pip groff less && \
 RUN apk -v --purge del py-pip && \
     rm /var/cache/apk/*
 
+VOLUME /src
+WORKDIR /src
+
 ENTRYPOINT ["aws"]
