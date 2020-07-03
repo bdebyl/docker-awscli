@@ -9,7 +9,7 @@ DESCRIPTION
 
 OPTIONS
     -h, --help         Shows this help prompt
-    -w, --width        Width threshold and dirname (default: 720px, 'w_720')
+    -w, --width        Width threshold and dirname (default: 500px, 'w_500')
     -d, --dry-run      Dry-run that will not create actual thumbnails
 EOF
 
@@ -24,7 +24,7 @@ show_help() {
 }
 
 # Defaults
-WIDTH=720
+WIDTH=500
 
 while :; do
     case $1 in
@@ -72,28 +72,25 @@ if [ ! "$CONVERT" ]; then
     exit 1
 fi
 
-find "$BROWSE_PATH" -type f -not -path '*thumb*' | while read -r i; do
-    # Generate a thumbnail if the width is greater than WIDTH (default: 720)
-    if [ "$(identify -format "%w\n" "$i" | head -n 1)" -gt "$(($WIDTH))" ]; then
-        # Create the thumbnail image
-        RESIZE_IMG="$(printf "%s" "$i" | sed 's|'$BROWSE_PATH'/*||g;')"
-        THUMB_PATH="$BROWSE_PATH/w_$WIDTH"
+find "$BROWSE_PATH" -type f -not -path '*w_500*' -and -not -path '*ico*' | while read -r i; do
+    # Create the thumbnail image
+    RESIZE_IMG="$(printf "%s" "$i" | sed 's|'$BROWSE_PATH'/*||g;')"
+    THUMB_PATH="$BROWSE_PATH/w_$WIDTH"
 
-        RESIZE_IMG_PATH="$THUMB_PATH/$(dirname $RESIZE_IMG)"
+    RESIZE_IMG_PATH="$THUMB_PATH/$(dirname $RESIZE_IMG)"
 
-        # Create the thumbnail directory fo the image to be made
-        if [ ! -d "$RESIZE_IMG_PATH" ]; then
-            printf "! Making directory: %s\n" "$RESIZE_IMG_PATH"
-            if [ ! "$DRYRUN" ]; then
-                mkdir -p "$RESIZE_IMG_PATH"
-            fi
+    # Create the thumbnail directory fo the image to be made
+    if [ ! -d "$RESIZE_IMG_PATH" ]; then
+        printf "! Making directory: %s\n" "$RESIZE_IMG_PATH"
+        if [ ! "$DRYRUN" ]; then
+            mkdir -p "$RESIZE_IMG_PATH"
         fi
+    fi
 
-        if [ ! -f "$THUMB_PATH/$RESIZE_IMG" ]; then
-            printf "└─ Converting %s to thumbnail in %s/%s \n" "$i" "$THUMB_PATH" "$RESIZE_IMG"
-            if [ ! "$DRYRUN" ]; then
-                "$CONVERT" -resize ${WIDTH}x "$i" "$THUMB_PATH/$RESIZE_IMG";
-            fi
+    if [ ! -f "$THUMB_PATH/$RESIZE_IMG" ]; then
+        printf "└─ Converting %s to thumbnail in %s/%s \n" "$i" "$THUMB_PATH" "$RESIZE_IMG"
+        if [ ! "$DRYRUN" ]; then
+            "$CONVERT" -resize ${WIDTH}x "$i" "$THUMB_PATH/$RESIZE_IMG";
         fi
     fi
 done
