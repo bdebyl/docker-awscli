@@ -37,6 +37,6 @@ steps:
         - master
 ---
 kind: signature
-hmac: 6a611c34790b862978383ca81aa80bdbd996a38b218a94b340123abbeeaeadff
+hmac: b1dac46481f40ad1a9d520942984dd5f301ecac9a63ee774e5906c4918a69812
 
 ...
