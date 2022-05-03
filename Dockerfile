@@ -1,5 +1,6 @@
 FROM alpine:3.15.4
 MAINTAINER Bastian de Byl <bastian@bdebyl.net>
+ENTRYPOINT ["aws"]
 
 # aws-cli dependencies: groff, less
 RUN apk --update add \
@@ -15,4 +16,3 @@ RUN apk --purge del py-pip && \
 WORKDIR /src
 
 VOLUME ["/src"]
-ENTRYPOINT ["aws"]

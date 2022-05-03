@@ -15,7 +15,7 @@ steps:
       - echo -n "0.1.$DRONE_BUILD_NUMBER" > .tags
 
   - name: gate-master
-    image: docker.io/alpine-git/bdebyl/alpine-git
+    image: docker.io/bdebyl/alpine-git
     commands:
       - git fetch origin +refs/heads/master
       - git show-ref
@@ -25,7 +25,7 @@ steps:
         - master
 
   - name: gate-pr
-    image: docker.io/alpine-git/bdebyl/alpine-git
+    image: docker.io/bdebyl/alpine-git
     commands:
       - git fetch origin +refs/heads/master
       - git show-ref
@@ -48,6 +48,6 @@ steps:
         - master
 ---
 kind: signature
-hmac: e00d92c525f648db7618b17efad6e21158e59175901f59574bfc4d93ebefb188
+hmac: d6a560ccbc30b42c35612e7b41b19bbea4701ace96b6c352f1ff3713e90fa22a
 
 ...
