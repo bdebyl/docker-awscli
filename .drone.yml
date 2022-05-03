@@ -2,7 +2,17 @@
 kind: pipeline
 name: default
 
+clone:
+  disable: true
+
 steps:
+  - name: clone
+    image: docker.io/bdebyl/alpine-git
+    commands:
+      - git clone https://github.com/bdebyl/docker-partkeepr.git .
+      - git checkout $DRONE_COMMIT
+      - echo -n "1.0.$DRONE_BUILD_NUMBER" > .tags
+
   - name: gate-master
     image: bdebyl/alpine-git
     commands:
@@ -37,6 +47,6 @@ steps:
         - master
 ---
 kind: signature
-hmac: b1dac46481f40ad1a9d520942984dd5f301ecac9a63ee774e5906c4918a69812
+hmac: dbd1aecb66eaf22fe55baafe00e0f8b60fc7d5b31f246e5ca31b4b161beb4151
 
 ...

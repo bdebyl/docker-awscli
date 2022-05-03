@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.15.4
 MAINTAINER Bastian de Byl <bastian@bdebyl.net>
 
 # aws-cli dependencies: groff, less
