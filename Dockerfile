@@ -13,6 +13,6 @@ RUN apk --purge del py-pip && \
     rm /var/cache/apk/*
 
 WORKDIR /src
-VOLUME ["/src"]
 
+VOLUME ["/src"]
 ENTRYPOINT ["aws"]

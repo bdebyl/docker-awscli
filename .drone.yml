@@ -1,9 +1,7 @@
 ---
 kind: pipeline
+type: docker
 name: default
-
-clone:
-  disable: true
 
 steps:
   - name: clone
@@ -14,7 +12,7 @@ steps:
       - echo -n "1.0.$DRONE_BUILD_NUMBER" > .tags
 
   - name: gate-master
-    image: bdebyl/alpine-git
+    image: docker.io/alpine-git/bdebyl/alpine-git
     commands:
       - git fetch origin +refs/heads/master
       - git show-ref
@@ -24,7 +22,7 @@ steps:
         - master
 
   - name: gate-pr
-    image: bdebyl/alpine-git
+    image: docker.io/alpine-git/bdebyl/alpine-git
     commands:
       - git fetch origin +refs/heads/master
       - git show-ref
@@ -47,6 +45,6 @@ steps:
         - master
 ---
 kind: signature
-hmac: 61a0f4e8c2964ff223c2444d0c34fce4d9d37481f271bbe2e9446e0b79bc2f36
+hmac: 7bb48e57d7fe13781c1839362cd25c62ce121b02f7083201fd04c7c560a419da
 
 ...
