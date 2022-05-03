@@ -14,5 +14,5 @@ RUN apk --purge del py-pip && \
 
 WORKDIR /src
 
-ENTRYPOINT ["aws"]
 VOLUME ["/src"]
+ENTRYPOINT ["aws"]

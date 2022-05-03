@@ -10,8 +10,8 @@ steps:
   - name: clone
     image: docker.io/bdebyl/alpine-git
     commands:
-      - git clone -v https://github.com/bdebyl/docker-awscli.git .
-      - git checkout -v $DRONE_COMMIT
+      - git clone https://github.com/bdebyl/docker-awscli.git .
+      - git checkout $DRONE_COMMIT
       - echo -n "0.1.$DRONE_BUILD_NUMBER" > .tags
 
   - name: gate-master
