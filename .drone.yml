@@ -3,15 +3,10 @@ kind: pipeline
 type: docker
 name: default
 
-clone:
-  disable: true
-
 steps:
-  - name: clone
-    image: docker.io/bdebyl/alpine-git
+  - name: set tag
+    image: docker.io/alpine-git/bdebyl/alpine-git
     commands:
-      - git clone https://github.com/bdebyl/docker-awscli.git .
-      - git checkout $DRONE_COMMIT
       - echo -n "1.0.$DRONE_BUILD_NUMBER" > .tags
 
   - name: gate-master
