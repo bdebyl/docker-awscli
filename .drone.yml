@@ -10,7 +10,7 @@ steps:
   - name: clone
     image: docker.io/bdebyl/alpine-git
     commands:
-      - git clone -v https://github.com/bdebyl/docker-drone.git .
+      - git clone -v https://github.com/bdebyl/docker-awscli.git .
       - git checkout -v $DRONE_COMMIT
       - echo -n "0.1.$DRONE_BUILD_NUMBER" > .tags
 
@@ -48,6 +48,6 @@ steps:
         - master
 ---
 kind: signature
-hmac: 8dd8c083505460b712492c79ae4ec47d9c0a1af302bfb4df3125d9961875026d
+hmac: e620710540421e51de4603ff16f9aff190da2041c58e949a0ed6e7dae9647d3e
 
 ...
