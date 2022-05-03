@@ -3,6 +3,9 @@ kind: pipeline
 type: docker
 name: default
 
+clone:
+  disable: true
+
 steps:
   - name: clone
     image: docker.io/bdebyl/alpine-git
@@ -45,6 +48,6 @@ steps:
         - master
 ---
 kind: signature
-hmac: 7bb48e57d7fe13781c1839362cd25c62ce121b02f7083201fd04c7c560a419da
+hmac: 8dd8c083505460b712492c79ae4ec47d9c0a1af302bfb4df3125d9961875026d
 
 ...
