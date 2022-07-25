@@ -44,10 +44,13 @@ steps:
         from_secret: docker_password
       repo: bdebyl/awscli
     when:
+      event:
+        exclude:
+          - cron
       branch:
         - master
 ---
 kind: signature
-hmac: d6a560ccbc30b42c35612e7b41b19bbea4701ace96b6c352f1ff3713e90fa22a
+hmac: fb17e797691928a8313004155ef4f3693c5d2087f7d3bae3373ae8bbd885fbcf
 
 ...
